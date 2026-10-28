@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/bfarkas/pixelart-pipeline/schema/asset-manifest.schema.json",
+  "title": "Pixel Art Pipeline Asset Manifest",
+  "type": "object",
+  "required": ["schemaVersion", "id", "kind", "status", "target", "source", "files"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]*$"},
+    "kind": {"enum": ["sprite", "tile", "tileset", "effect", "ui"]},
+    "status": {"enum": ["briefed", "generated", "selected", "normalized", "validated", "compiled", "accepted", "rejected"]},
+    "source": {
+      "type": "object",
+      "required": ["references", "provenanceNote"],
+      "properties": {
+        "references": {"type": "array", "items": {"type": "string"}},
+        "provenanceNote": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "target": {
+      "type": "object",
+      "required": ["width", "height", "mode", "paletteId"],
+      "properties": {
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1},
+        "mode": {"enum": ["gba-4bpp", "desktop-only"]},
+        "paletteId": {"type": "string", "minLength": 1},
+        "tileAligned": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "generation": {
+      "type": "object",
+      "properties": {
+        "provider": {"type": "string"},
+        "model": {"type": "string"},
+        "workflow": {"type": "string"},
+        "requestId": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "files": {
+      "type": "object",
+      "required": ["nativePng"],
+      "properties": {
+        "nativePng": {"type": "string"},
+        "previewPng": {"type": "string"},
+        "validationReport": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "animation": {
+      "type": "object",
+      "required": ["anchor", "sequences"],
+      "properties": {
+        "anchor": {
+          "type": "object",
+          "required": ["x", "y"],
+          "properties": {"x": {"type": "integer"}, "y": {"type": "integer"}},
+          "additionalProperties": false
+        },
+        "sequences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "frames", "frameDurationMs", "loop"],
+            "properties": {
+              "name": {"type": "string"},
+              "frames": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+              "frameDurationMs": {"type": "integer", "minimum": 1},
+              "loop": {"type": "boolean"}
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

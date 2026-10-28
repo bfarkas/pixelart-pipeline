@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "forest_spirit",
+  "kind": "sprite",
+  "status": "briefed",
+  "source": {
+    "references": ["briefs/forest-spirit.md"],
+    "provenanceNote": "Example only. Production art must be an original character or have documented rights."
+  },
+  "target": {
+    "width": 32,
+    "height": 32,
+    "mode": "gba-4bpp",
+    "paletteId": "forest-creature-01",
+    "tileAligned": true
+  },
+  "files": {
+    "nativePng": "assets/forest_spirit/forest_spirit.png",
+    "previewPng": "previews/forest_spirit@4x.png"
+  },
+  "animation": {
+    "anchor": {"x": 16, "y": 31},
+    "sequences": [
+      {"name": "idle", "frames": ["idle_00", "idle_01"], "frameDurationMs": 150, "loop": true},
+      {"name": "walk", "frames": ["walk_00", "walk_01", "walk_02", "walk_03"], "frameDurationMs": 100, "loop": true}
+    ]
+  }
+}
